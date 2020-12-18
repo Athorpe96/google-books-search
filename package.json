@@ -4,11 +4,13 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "install-client": "cd client && npm install",
-    "heroku-postbuild": "npm run install-client &&npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -19,5 +21,12 @@
   "bugs": {
     "url": "https://github.com/Athorpe96/google-books-search/issues"
   },
-  "homepage": "https://github.com/Athorpe96/google-books-search#readme"
+  "homepage": "https://github.com/Athorpe96/google-books-search#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "if-env": "^1.0.4",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.11.8"
+  }
 }
